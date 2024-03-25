@@ -1,0 +1,33 @@
+﻿@page "/"
+@inject IJSRuntime JS
+
+<PageTitle>Klikačka</PageTitle>
+
+<h1>Klikačka!</h1>
+<div>
+    <table>
+        <tbody>
+            @for (int i = 0; i < zaklad.Matice.GetLength(0); i++)
+            {
+                var radka = i;
+                <tr>
+                    @for (int j = 0; j < zaklad.Matice.GetLength(1); j++)
+                    {
+                        var sloupec = j;
+                        <td class="@zaklad.Matice[radka,sloupec].StylBarvy" @onclick = "()=>zaklad.OnCellClick(zaklad.Matice[radka,sloupec])">@zaklad.Matice[i,j].Hodnota</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code{
+    private Models.Zaklad zaklad = new Models.Zaklad();
+
+    // private void OnCellClick(Models.Bunka bunka)
+    // {
+    //     var zprava = $"r:{bunka.Radka} - s:{bunka.Sloupec} - Hodnota:{bunka.Hodnota}";
+    //     JS.InvokeVoidAsync("alert", zprava);
+    // }
+}
